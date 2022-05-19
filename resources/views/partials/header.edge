@@ -1,0 +1,14 @@
+<header class="bg-white py-5 mb-5">
+  <div class="max-w-screen-lg m-auto">
+    <a href="/">Home</a>
+    @if(auth.isLoggedIn)
+      <form action="{{ route('AuthController.logout', { qs: { '_method': 'DELETE'} }) }}" method="POST">
+        {{ csrfField() }}
+        <button>Déconnexion</button>
+      </form>
+    @else
+      <a href="{{ route('AuthController.showLogin') }}">Connexion</a>
+      <a href="{{ route('AuthController.showRegistration') }}">Inscription</a> 
+    @endif
+  </div>
+</header>

@@ -4,9 +4,8 @@ export default class UsersSchema extends BaseSchema {
   protected tableName = 'users'
 
   public async up() {
-    this.schema.raw('CREATE EXTENSION IF NOT EXISTS "uuid-ossp"')
     this.schema.createTable(this.tableName, (table) => {
-      table.uuid('id').primary()
+      table.uuid('id').primary().defaultTo(this.db.rawQuery('uuid_generate_v4()').knexQuery)
       table.string('username', 50).notNullable().unique()
       table.string('email', 255).notNullable().unique()
       table.string('password', 180).notNullable()
@@ -21,7 +20,6 @@ export default class UsersSchema extends BaseSchema {
   }
 
   public async down() {
-    this.schema.raw('DROP EXTENSION IF EXISTS "uuid-ossp"')
     this.schema.dropTable(this.tableName)
   }
 }
