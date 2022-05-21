@@ -5,7 +5,7 @@
     <p>Email ou mot de passe incorrect</p>
   @end
   <h1>Connexion</h1>
-  <form action="{{ route('AuthController.login') }}" method="POST">
+  <form action="{{ route('AuthController.login') }}" method="POST" up-submit>
     {{ csrfField() }}
     
     <div>

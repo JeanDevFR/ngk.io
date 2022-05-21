@@ -1,28 +1,31 @@
 @layout('layouts/app')
 
 @section('content')
-  @if(flashMessages.has('auth.errors'))
-    <p>Email ou mot de passe incorrect</p>
-  @end
-  <h1>Inscription</h1>
-  <form action="{{ route('AuthController.register') }}" method="POST">
+  <form action="{{ route('AuthController.register') }}" method="POST" up-submit>
     {{ csrfField() }}
 
-    <div>
-      <label for="username">Username</label>
-      <input type="text" name="username" id="username">
-    </div>
+    @form.group({ name: 'username' })
+      @!form.label({ title: 'Pseudo' })
+      @!form.field({ type: 'text' })
+    @end
     
-    <div>
-      <label for="email">Email</label>
-      <input type="email" name="email" id="email">
-    </div>
+    @form.group({ name: 'email' })
+      @!form.label({ title: 'Email' })
+      @!form.field({ type: 'email' })
+    @end
 
-    <div>
-      <label for="password">Mot de passe</label>
-      <input type="password" name="password" id="password">
-    </div>
+    @form.group({ name: 'password' })
+      @!form.label({ title: 'Mot de passe' })
+      @!form.field({ type: 'password' })
+    @end
 
-    <button>Inscription</button>
+    @form.group({ name: 'password_confirmation' })
+      @!form.label({ title: 'Confirmation' })
+      @!form.field({ type: 'password' })
+    @end
+
+    @elements.button({ type: 'submit' })
+      Inscription
+    @end
   </form>
 @end

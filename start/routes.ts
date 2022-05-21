@@ -29,3 +29,5 @@ Route.get('register', 'AuthController.showRegistration')
 Route.post('register', 'AuthController.register')
 
 Route.delete('logout', 'AuthController.logout')
+
+Route.get('users/:id/confirm', 'AuthController.confirmEmail')
