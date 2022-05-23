@@ -7,7 +7,7 @@ export default class Posts extends BaseSchema {
     this.schema.createTable(this.tableName, (table) => {
       table.increments('id')
       table.string('title', 150).notNullable()
-      table.string('slug', 255).notNullable()
+      table.string('slug', 255).notNullable().unique()
       table.text('body').notNullable()
       table.boolean('draft').notNullable().defaultTo(true)
 
