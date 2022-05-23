@@ -5,19 +5,26 @@
     <p>Email ou mot de passe incorrect</p>
   @end
   <h1>Connexion</h1>
-  <form action="{{ route('AuthController.login') }}" method="POST" up-submit>
-    {{ csrfField() }}
+  <form 
+    action="{{ route('AuthController.login') }}" 
+    method="POST" 
+    up-submit 
+    up-target="[page-body]">
     
-    <div>
-      <label for="email">Email</label>
-      <input type="email" name="email" id="email">
-    </div>
+    {{ csrfField() }}
 
-    <div>
-      <label for="password">Mot de passe</label>
-      <input type="password" name="password" id="password">
-    </div>
+    @form.group({ name: 'email' })
+      @!form.label({ title: 'Email' })
+      @!form.input({ type: 'email' })
+    @end
 
-    <button>Connexion</button>
+    @form.group({ name: 'password' })
+      @!form.label({ title: "Nom d'utilisateur"})
+      @!form.input({ type: 'password' })
+    @end
+
+    @elements.button()
+      Connexion
+    @end
   </form>
 @end

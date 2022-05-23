@@ -29,7 +29,7 @@ export default class EmailConfirmation extends BaseMailer {
     ).html
 
     message
-      .subject('[NGK.IO] - Validation de votre compte')
+      .subject('[NGK] - Validation de votre compte')
       .from('no-reply@ngk.io')
       .to(this.user.email)
       .html(html)

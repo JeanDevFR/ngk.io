@@ -22,24 +22,18 @@ export default class AuthController {
     return view.render('auth/register')
   }
 
-  public async register({ request, response, auth }: HttpContextContract) {
+  public async register({ request, response }: HttpContextContract) {
     const payload = await request.validate(RegisterValidator)
 
     const user = await User.create(payload)
 
     const url = Route.makeSignedUrl(
       'AuthController.confirmEmail',
-      {
-        id: user.id,
-      },
-      {
-        expiresIn: '30m',
-      }
+      { id: user.id },
+      { expiresIn: '30m' }
     )
 
     new EmailConfirmation(user, `${Env.get('APP_URL')}${url}`).sendLater()
-
-    // await auth.login(user)
 
     return response.redirect('/')
   }
@@ -57,10 +51,15 @@ export default class AuthController {
     }
 
     const id = params.id
+
     const user = await User.findOrFail(id)
+
     user.status = UserStatus.Active
+
     await user.save()
+
     await auth.login(user)
+
     return response.redirect().toPath('/')
   }
 }

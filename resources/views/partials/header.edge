@@ -2,9 +2,17 @@
   <div class="max-w-screen-lg m-auto">
     <a href="/" up-follow>Home</a>
     @if(auth.isLoggedIn)
-      <form action="{{ route('AuthController.logout') }}?_method=DELETE" method="POST">
+      <form 
+        action="{{ route('AuthController.logout') }}?_method=DELETE" 
+        method="POST" 
+        up-submit 
+        up-target="[page-body]">
+        
         {{ csrfField() }}
-        <button>Déconnexion ({{ auth.user.username }})</button>
+
+        @elements.button()
+          Déconnexion ({{ auth.user.username }})
+        @end
       </form>
     @else
       <a href="{{ route('AuthController.showLogin') }}" up-follow>Connexion</a>

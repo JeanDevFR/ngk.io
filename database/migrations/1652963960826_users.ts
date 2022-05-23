@@ -5,12 +5,12 @@ export default class UsersSchema extends BaseSchema {
 
   public async up() {
     this.schema.createTable(this.tableName, (table) => {
-      table.uuid('id').primary().defaultTo(this.db.rawQuery('uuid_generate_v4()').knexQuery)
+      table.uuid('id').primary().defaultTo(this.raw('uuid_generate_v4()'))
       table.string('username', 50).notNullable().unique()
       table.string('email', 255).notNullable().unique()
       table.string('password', 180).notNullable()
       table.string('remember_me_token').nullable()
-      table.integer('status').notNullable().defaultTo(1)
+      table.integer('status').notNullable().defaultTo(0)
 
       /**
        * Uses timestampz for PostgreSQL and DATETIME2 for MSSQL
