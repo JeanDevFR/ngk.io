@@ -1,4 +1,5 @@
 export enum UserStatus {
-  Pending,
+  Inactive,
   Active,
+  Banned,
 }
