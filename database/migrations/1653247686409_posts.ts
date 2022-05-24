@@ -1,4 +1,5 @@
 import BaseSchema from '@ioc:Adonis/Lucid/Schema'
+import { PostStatus } from 'App/Enums/PostStatus'
 
 export default class Posts extends BaseSchema {
   protected tableName = 'posts'
@@ -9,7 +10,7 @@ export default class Posts extends BaseSchema {
       table.string('title', 150).notNullable()
       table.string('slug', 255).notNullable().unique()
       table.text('body').notNullable()
-      table.integer('status').notNullable().defaultTo(0)
+      table.integer('status').unsigned().notNullable().defaultTo(PostStatus.Draft)
       table.uuid('user_id').notNullable().references('id').inTable('users').onDelete('CASCADE')
       table.timestamp('created_at', { useTz: true })
       table.timestamp('updated_at', { useTz: true })
